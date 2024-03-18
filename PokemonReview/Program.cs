@@ -1,5 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using PokemonReview.Data;
+using PokemonReview.Interfaces;
+using PokemonReview.Repository;
 using PokemonReview.Seeding;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -11,6 +13,8 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddControllers();
 
 builder.Services.AddTransient<Seed>();
+builder.Services.AddScoped<PokemonDbContext>();
+builder.Services.AddScoped<IPokemonRepository, PokemonRepository>();
 
 builder.Services.AddDbContext<PokemonDbContext>(options =>
 {
